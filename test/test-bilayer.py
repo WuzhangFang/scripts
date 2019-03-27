@@ -1,6 +1,6 @@
 # Author: Wuzhang Fang
 # Email: wfang@huskers.unl.edu
-# Purpose: generate a POSCAR file of a bilayer BCC system
+# Purpose: generate a POSCAR file of a bilayer FCC system
 # Input: 1. number of layers of first compound (n1)
 #        2. number of layers of second compound (n2)
 #        3. layer spacing of first compound (d1)
@@ -11,21 +11,13 @@
 # +---------+
 # | vacuum  |
 # +---------+
-# | alpha-W |
+# | layer 2 |
 # +---------+
-# | Mn2Au   |
+# | layer 1 |
 # +---------+
 # | vaccum  |
 # +---------+
 #
-# Mn2Au with alpha-W
-# lattice constant of Mn2Au: a = 3.328 angstrom, c = 8.539 angstrom
-# (http://scripts.iucr.org/cgi-bin/paper?S056773947000092X)
-#
-
-a = 3.328
-d1 = 1.42
-d2 = 1.58
 from collections import OrderedDict
 
 class Bilayer:
@@ -62,12 +54,16 @@ class Bilayer:
                 # odd layer
                 self.coordinates.append([0,0,z1])
                 self.atom_counter[0][1] += 1
+                self.coordinates.append([0.5,0.5,z1])
+                self.atom_counter[0][1] += 1
         # store the even coordinates in layer 1
         for i in range(n1):
             z1 = (thickness/2.00 - (self.d)/2.00 - i*self.d1)/thickness
             if (i+1)%2 == 0:                
                 # even layer
-                self.coordinates.append([0.5,0.5,z1])
+                self.coordinates.append([0.5,0,z1])
+                self.atom_counter[1][1] += 1
+                self.coordinates.append([0,0.5,z1])
                 self.atom_counter[1][1] += 1
         # store the odd coordinates in layer 2
         for i in range(n2):
@@ -76,14 +72,24 @@ class Bilayer:
                 # odd layer
                 self.coordinates.append([0,0,z2])
                 self.atom_counter[2][1] += 1
+                self.coordinates.append([0.5,0.5,z2])
+                self.atom_counter[2][1] += 1
         # store the even coordinates in layer 2
         for i in range(n2):
             z2 = (thickness/2.00 + (self.d)/2.00 + i*self.d2)/thickness
             if (i+1)%2 == 0:                
                 # even layer
-                self.coordinates.append([0.5,0.5,z2])
+                self.coordinates.append([0.5,0,z2])
+                self.atom_counter[3][1] += 1
+                self.coordinates.append([0,0.5,z2])
                 self.atom_counter[3][1] += 1
 
+# generate Mn2Au with alpha-W
+# lattice constant of Mn2Au: a = 3.328 angstrom, c = 8.539 angstrom
+# (http://scripts.iucr.org/cgi-bin/paper?S056773947000092X)
+a = 3.328
+d1 = 1.42
+d2 = 1.58
 test = Bilayer(a, d1, d2)
 # add atoms
 test.add_atom('Mn') # layer 1 odd layer
@@ -91,7 +97,7 @@ test.add_atom('Au') # layer 1 even layer
 test.add_atom('W')  # layer 2 odd layer
 test.add_atom('W')  # layer 2 even layer
 # add layers
-test.add_layers(4,4)
+test.add_layers(4,2)
 # generate POSCAR
 output_file = open('POSCAR', 'w')
 print('bilayer', file=output_file)
