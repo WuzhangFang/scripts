@@ -6,7 +6,8 @@ class Bilayer:
            2. number of layers of second compound (n2)
            3. layer spacing of first compound (d1)
            4. layer spacing of second compound (d2)
-           5. in-plane lattice constant (a)
+           5. interlayer distance (d)
+           6. in-plane lattice constant (a)
     """
     def __init__(self, a=1.0, d1=1.0, d2=1.0, d=1.0):
         self.n1 = 1
