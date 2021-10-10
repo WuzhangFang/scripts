@@ -1,3 +1,2 @@
-# Python_scripts_VASP
-Some scripts to generate the input files that used in VASP.
-- bilayer.py: generate a POSCAR of bilayer
+bilayer.py: generate a POSCAR of bilayer
+mn2au.py: to generate Mn2Au with vaccum layer.
