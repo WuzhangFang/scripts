@@ -38,4 +38,4 @@ test.add_atom('W')  # layer 2 even layer
 # add_layers(#Mn2Au, #W)
 test.add_layers(12,6)
 # generate POSCAR
-test.printfile()
+test.printfile('POSCAR-mn2au')

@@ -35,18 +35,14 @@ class Bilayer:
         thickness = (n1-1) * self.d1 + (n2-1) * self.d2 + self.d + 20.00
         self.thickness = thickness
         print("The thickness including vacuum layer is {} angstrom.".format(thickness))
-        # store the odd coordinates in layer 1
+        # store the coordinates in layer 1
         for i in range(n1):
             z1 = (thickness/2.00 - (self.d)/2.00 - i*self.d1)/thickness
             if (i+1)%2 == 1:
                 # odd layer
                 self.coordinates.append([0,0,z1])
                 self.atom_counter[0][1] += 1
-        # store the even coordinates in layer 1
-        for i in range(n1):
-            z1 = (thickness/2.00 - (self.d)/2.00 - i*self.d1)/thickness
-            if (i+1)%2 == 0:                
-                # even layer
+            else:
                 self.coordinates.append([0.5,0.5,z1])
                 self.atom_counter[1][1] += 1
         # store the odd coordinates in layer 2
@@ -56,13 +52,9 @@ class Bilayer:
                 # odd layer
                 self.coordinates.append([0.5,0.5,z2])
                 self.atom_counter[2][1] += 1
-        # store the even coordinates in layer 2
-        for i in range(n2):
-            z2 = (thickness/2.00 + (self.d)/2.00 + i*self.d2)/thickness
-            if (i+1)%2 == 0:                
-                # even layer
+            else:
                 self.coordinates.append([0,0,z2])
-                self.atom_counter[3][1] += 1
+                self.atom_counter[3][1] += 1               
 
     def printfile(self, file='POSCAR-preliminary'):
         output_file = open(file, 'w')
@@ -87,5 +79,5 @@ class Bilayer:
         for coordinate in self.coordinates:
             print('{}    {}    {}'.format(coordinate[0],coordinate[1],coordinate[2]), file=output_file)
         output_file.close()
-        print('done -> POSCAR')
+        print('done -> {}'.format(file))
 
