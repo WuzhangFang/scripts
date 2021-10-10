@@ -36,30 +36,6 @@ test.add_atom('Mn') # layer 1 even layer
 test.add_atom('W')  # layer 2 odd layer
 test.add_atom('W')  # layer 2 even layer
 # add_layers(#Mn2Au, #W)
-test.add_layers(7,6)
+test.add_layers(12,6)
 # generate POSCAR
-output_file = open('POSCAR-preliminary', 'w')
-print('bilayer', file=output_file)
-print('1.0', file=output_file)
-print('{}    0.000    0.000'.format(test.a), file=output_file)
-print('0.000    {}    0.000'.format(test.a), file=output_file)
-print('0.000    0.000    {}'.format(test.thickness), file=output_file)
-# use a ordered dictionary to store the species and numbers of each atom
-# species
-atom_counter = OrderedDict()
-for atom in test.atom_counter:
-    if atom[0] not in atom_counter.keys():
-        atom_counter[atom[0]] = atom[1]
-    else:
-        atom_counter[atom[0]] += atom[1]
-print('  '.join([k for k,v in atom_counter.items()]))        
-print('  '.join([k for k,v in atom_counter.items()]), file=output_file)
-# numbers
-print('  '.join([str(v) for k,v in atom_counter.items()]))
-print('  '.join([str(v) for k,v in atom_counter.items()]), file=output_file)
-print('Direct', file=output_file)
-# coordinate of each atom
-for coordinate in test.coordinates:
-    print('{}    {}    {}'.format(coordinate[0],coordinate[1],coordinate[2]), file=output_file)
-output_file.close()
-print('done -> POSCAR')
+test.printfile()
