@@ -1,2 +1,3 @@
-bilayer.py: generate a POSCAR of bilayer
-mn2au.py: to generate Mn2Au with vaccum layer.
+## convert CONTCAR to openmx.dat
+- Change the settings in convert.py
+- Run: python convert.py
