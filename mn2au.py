@@ -6,7 +6,7 @@
 #        3. layer spacing of first compound (d1)
 #        4. layer spacing of second compound (d2)
 #        5. in-plane lattice constant (a)
-# Output: POSCAR
+# Output: POSCAR-preliminary
 #
 # +---------+
 # | vacuum  |
