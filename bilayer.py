@@ -8,7 +8,7 @@ class Bilayer:
            4. layer spacing of second compound (d2)
            5. in-plane lattice constant (a)
     """
-    def __init__(self, a=1.0, d1=1.0, d2=1.0):
+    def __init__(self, a=1.0, d1=1.0, d2=1.0, d=1.0):
         self.n1 = 1
         self.n2 = 1
         self.a = a
@@ -17,7 +17,10 @@ class Bilayer:
         # here assuming interface distance is the average of layer spacings
         # this can be served as an initial guess
         # after relaxation, modify here using a better value
-        self.d = 1.658 # from previous relaxation
+        if d==1.0:
+            self.d = (d1 + d2)/2
+        else:
+            self.d = d # from previous relaxation
         self.a = a
         self.coordinates = []
         self.thickness = 0.0

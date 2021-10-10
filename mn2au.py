@@ -28,7 +28,8 @@ from bilayer import Bilayer
 a = 3.328
 d1 = 1.42
 d2 = 1.58
-test = Bilayer(a, d1, d2)
+d = 1.658
+test = Bilayer(a, d1, d2, d)
 # add atoms
 test.add_atom('Au') # layer 1 odd layer
 test.add_atom('Mn') # layer 1 even layer
