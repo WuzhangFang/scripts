@@ -24,7 +24,6 @@
 #
 # import class
 from bilayer import Bilayer
-from collections import OrderedDict
 # initialize the parameters
 a = 3.328
 d1 = 1.42
